@@ -1,0 +1,29 @@
+.navbarEjecutivo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+    color: white;
+    
+    &--logo{
+        display: flex;
+        align-items: center;
+        img{
+            width: 30px;
+        }
+        h1{
+            
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+    }
+
+    &--user{
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        
+    }
+
+}

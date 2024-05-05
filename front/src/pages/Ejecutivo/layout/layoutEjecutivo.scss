@@ -1,0 +1,29 @@
+.layoutEjecutivo{
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    .ejecutivo{
+
+        &--navbar{
+            background: rgb(30, 30, 30);
+            width: 100%;
+            height: 60px;
+        }
+
+        &--main{
+            width: 100%;
+            display: flex;
+           .ejecutivo--menu--container{
+                width: 250px;
+                background: rgb(224, 224, 224);
+                min-height: 100vh;
+           }
+
+           .ejecutivo--content--container{
+                width: 100%;
+                background: rgb(233, 233, 233);
+           }
+        }
+    }
+}
