@@ -30,7 +30,6 @@ export default class SimulationController {
     try {
       
       const userId = req.body.userId;
-      console.log(userId);
   
       // Buscar todas las simulaciones que coincidan con el userId
       const simulations = await Simulation.findAll({
@@ -61,6 +60,43 @@ export default class SimulationController {
     }
   }
 
+  async getSimulationByIdFormatted(req, res) {
+    //Esta funcion tiene como fin encontrar una simulacion en base al id, y crear la lista de cuotas, de la misma forma que en createSimulation
+    try {
+      const simulation = await Simulation.findByPk(req.body.id);
+      if (!simulation) {
+        res.status(404).json({ error: 'Simulación no encontrada' });
+        return;
+      }
+
+      let cuotas = [];
+      let totalAmount = simulation.totalAmount; //Esto es en pesos
+      let startDate = new Date(simulation.startDate);
+      let endDate = new Date(simulation.endDate);
+      let interestRate = simulation.interestRate;
+      let totalInterest = totalAmount * interestRate //Esto es en pesos
+      let totalAmountWithInterest = totalAmount + totalInterest;
+      totalAmountWithInterest = parseFloat(totalAmountWithInterest);
+      let totalCuotas = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth()) + 1;
+      let cuota = totalAmountWithInterest / totalCuotas;
+      let cuotaUF = cuota / simulation.ufValueAtCreation;
+      cuotaUF = cuotaUF.toFixed(2);
+      let fecha = startDate;
+
+      let i = 1;
+      while (fecha < endDate) {
+        // Crear una nueva variable para la fecha formateada
+        let fechaFormateada = new Date(fecha).toISOString().slice(0, 10);
+        cuotas.push({ id: i, nCuota: i, fechaVencimiento: fechaFormateada, montoUF: cuotaUF });
+        fecha.setMonth(fecha.getMonth() + 1);
+        i++;
+      }
+      res.send({cuotas});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al obtener la simulación' });
+    }
+  }
 
   async createSimulation(req, res) {
     try {
@@ -108,11 +144,11 @@ export default class SimulationController {
       while (fecha < endDate) {
         // Crear una nueva variable para la fecha formateada
         let fechaFormateada = new Date(fecha).toISOString().slice(0, 10);
-        cuotas.push({ nCuota: i, fechaVencimiento: fechaFormateada, montoUF: cuotaUF });
+        cuotas.push({ id: i, nCuota: i, fechaVencimiento: fechaFormateada, montoUF: cuotaUF });
         fecha.setMonth(fecha.getMonth() + 1);
         i++;
       }
-      res.send({cuotas });
+      res.send({id_simulacion: simulation.id, cuotas});
 
     } catch (error) {
       console.error(error);

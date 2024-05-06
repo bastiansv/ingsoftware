@@ -21,8 +21,10 @@ export default (app) => {
   	app.get('/simulations/:id', simulationController.getSimulationById);
   	app.put('/simulations/:id', simulationController.updateSimulation);
   	app.delete('/simulations/:id', simulationController.deleteSimulation);
+	app.get('/simulationsCuotas', simulationController.getSimulationByIdFormatted);
 
 	app.get('/solicitudes', solicitudesController.getAllSolicitudes);
+	app.post('/solicitud', solicitudesController.createSolicitudes);
 
 	app.get('/uf', simulationController.ufValue);
 
