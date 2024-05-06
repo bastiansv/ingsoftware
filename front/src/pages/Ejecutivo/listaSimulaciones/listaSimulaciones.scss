@@ -1,0 +1,15 @@
+.listaSimulaciones{
+    min-height: calc(100vh - 60px);
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    .acciones{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 0;
+    }
+}

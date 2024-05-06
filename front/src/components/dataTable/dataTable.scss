@@ -1,0 +1,22 @@
+.dataTable {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .dataGrid {
+        color: #333333;
+        max-width: 90%;
+
+        .MuiDataGrid-menuIcon{
+            button{
+                color: white;
+            }
+        }
+
+        .MuiDataGrid-iconButtonContainer{
+            button{
+                color: white;
+            }
+        }
+    }
+}

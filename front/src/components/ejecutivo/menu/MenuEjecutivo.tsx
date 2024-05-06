@@ -10,7 +10,15 @@ const MenuEjecutivo = () => {
             </li>
             <li>
                 <img src="/loan.svg" alt="" />
-                <a href="/ejecutivo/solicitud">Solicitud de Prestamo</a>
+                <a href="/ejecutivo/solicitud">Simular Préstamo</a>
+            </li>
+            <li>
+                <img src="/list.svg" alt="" />
+                <a href="/ejecutivo/simulaciones">Lista simulaciones</a>
+            </li>
+            <li>
+                <img src="/list.svg" alt="" />
+                <a href="/ejecutivo">Lista solicitudes</a>
             </li>
         </ul>
     </div>
