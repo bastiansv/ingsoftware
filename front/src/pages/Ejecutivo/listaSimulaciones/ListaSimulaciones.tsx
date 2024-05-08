@@ -1,9 +1,13 @@
 import { GridColDef } from "@mui/x-data-grid"
 import DataTable from "../../../components/dataTable/DataTable"
 import "./listaSimulaciones.scss"
+import { useState } from "react";
+import Modal from "../../../components/modal/Modal";
 import { Button } from "@mui/material";
 
 const ListaSimulaciones = () => {
+
+  const [modal, setModal] = useState(false);
 
   const columns: GridColDef[] = [
     { field: 'userRut', headerName: 'Rut solicitante', flex: 1, align: 'center',headerAlign: 'center'},
@@ -18,7 +22,7 @@ const ListaSimulaciones = () => {
       align: 'center',
       headerAlign: 'center',
       renderCell: (params) => (
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={()=>{setModal(true)}}>
           Ver Detalles
         </Button>
       ),
@@ -44,6 +48,8 @@ const ListaSimulaciones = () => {
         <h1>Lista de simulaciones de préstamo</h1>
       </div>
       <DataTable columns={columns} rows={rows} id="id" />
+
+      {modal && <Modal setModal={setModal}/>}
     </div>
   )
 }

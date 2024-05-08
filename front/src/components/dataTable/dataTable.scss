@@ -7,6 +7,10 @@
         color: #333333;
         max-width: 90%;
 
+        .MuiDataGrid-scrollbar{
+            z-index: 1;
+        }
+
         .MuiDataGrid-menuIcon{
             button{
                 color: white;
