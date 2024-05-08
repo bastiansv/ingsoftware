@@ -13,17 +13,18 @@ export default class {
       if (user) {
         //Aqui verifico si el usuario es @ejecutivo.cl, @analista.cl o @gerente.cl
         if (user.email.includes("@ejecutivo.cl")) {
-          res.send({ user, role: "ejecutivo" });
+          //Mando el id del usuario y el rol
+          res.send({ id: user.id  , role: "ejecutivo" });
         } else if (user.email.includes("@analista.cl")) {
-          res.send({ user: user, role: "analista" });
+          res.send({ id: user.id, role: "analista" });
         } else if (user.email.includes("@gerente.cl")) {
-          res.send({ user: user, role: "gerente" });
+          res.send({ id: user.id, role: "gerente" });
         } 
       } else {
-        res.status(401).send({ error: "Usuario o contraseña incorrectos" });
+        res.status(401).send({ message: "Usuario o contraseña incorrectos" });
       }
     } catch (error) {
-      res.status(500).send({ error: "Error de servidor" });
+      res.status(500).send({ message: "Error de servidor" });
     }
   }
 

@@ -28,6 +28,6 @@ export default (app) => {
 
 	app.get('/uf', simulationController.ufValue);
 
-	app.put('/login',loginController.login);
+	app.post('/login',loginController.login);
 	app.get('/login',loginController.get);
 };
