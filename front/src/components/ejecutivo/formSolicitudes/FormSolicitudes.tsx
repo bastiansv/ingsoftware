@@ -1,45 +1,67 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import "./formSolicitudes.scss"
 
-const FormSolicitudes = () => {
-  return (
-    <div className="formSolicitudes">
-        <form action="">
-            <div className="form--content">
-                <div className="form--section">
-                    <div className="form--item">
-                        <label htmlFor="nombre">Rut solicitante:</label>
-                        <input type="text" name="rut" id="rut"/>
+interface ChildProps {
+    sendDataToParent: (data: string) => void;
+}
+
+const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent}) => {
+    const [rut, setRut] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [amount, setAmount] = useState(0);
+    const [interest, setInterest] = useState(0);
+
+    const sendDataToParentOnClick = async () => {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+        const response = await axios.post('http://localhost:3000/simulations', {
+            userId: userData.id,
+            userRut: rut,
+            totalAmount: amount,
+            startDate,
+            endDate,
+            interestRate: interest
+        });
+        sendDataToParent(response.data);
+    };
+
+    return (
+        <div className="formSolicitudes">
+            <form action="">
+                <div className="form--content">
+                    <div className="form--section">
+                        <div className="form--item">
+                            <label htmlFor="nombre">Rut solicitante:</label>
+                            <input type="text" name="rut" id="rut" value={rut} onChange={e => setRut(e.target.value)}/>
+                        </div>
+                        <div className="form--item">
+                            <label htmlFor="fechasolicitud">Fecha inicio:</label>
+                            <input type="date" name="fechasolicitud" id="fechasolicitud" value={startDate} onChange={e => setStartDate(e.target.value)}/>
+                        </div>
+                        <div className="form--item">
+                            <label htmlFor="fechafin">Fecha fin:</label>
+                            <input type="date" name="fechafin" id="fechafin" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+                        </div>
                     </div>
-                    <div className="form--item">
-                        <label htmlFor="fechasolicitud">Fecha inicio:</label>
-                        <input type="date" name="fechasolicitud" id="fechasolicitud"/>
-                    </div>
-                    <div className="form--item">
-                        <label htmlFor="fechafin">Fecha fin:</label>
-                        <input type="date" name="fechafin" id="fechafin"/>
+                    <div className="form--section">
+                        <div className="form--item">
+                            <label htmlFor="monto">Monto:</label>
+                            <input type="number" name="monto" id="monto" value={amount} onChange={e => setAmount(Number(e.target.value))}/>
+                        </div>
+                        <div className="form--item">
+                            <label htmlFor="interes">Interés:</label>
+                            <input type="number" name="interes" id="interes" value={interest} onChange={e => setInterest(Number(e.target.value))}/>
+                        </div>
                     </div>
                 </div>
-                <div className="form--section">
-                    <div className="form--item">
-                        <label htmlFor="monto">Monto:</label>
-                        <input type="number" name="monto" id="monto"/>
-                    </div>
-                    <div className="form--item">
-                        <label htmlFor="interes">Interés:</label>
-                        <input type="number" name="interes" id="interes"/>
-                    </div>
-                    <div className="form--item">
-                        <label htmlFor="uf">Valor UF actual:</label>
-                        <input type="number" name="uf" id="uf"/>
-                    </div>
+                <div className="form--button">
+                    <button type="button" onClick={sendDataToParentOnClick}>Simular</button>
                 </div>
-            </div>
-            <div className="form--button">
-                <button>Simular</button>
-            </div>
-        </form>
-    </div>
-  )
+            </form>
+        </div>
+    )
 }
 
 export default FormSolicitudes
