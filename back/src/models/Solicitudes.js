@@ -44,7 +44,7 @@ Solicitudes.init(
   },
   {
     sequelize,
-    timestamps: true,
+    timestamps: false,
   }
 );
 
