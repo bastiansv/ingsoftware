@@ -47,7 +47,7 @@ export default class SimulationController {
         simulationsFormatted.push({ id: simulation.id, userRut: simulation.userRut, totalAmount: simulation.totalAmount, startDate: startDate, endDate: endDate });
       });
       res.send(simulationsFormatted);
-      
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Error al obtener las simulaciones' });
@@ -154,6 +154,7 @@ export default class SimulationController {
         fecha.setMonth(fecha.getMonth() + 1);
         i++;
       }
+      console.log({id_simulacion: simulation.id, cuotas})
       res.send({id_simulacion: simulation.id, cuotas});
 
     } catch (error) {

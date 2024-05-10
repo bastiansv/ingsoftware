@@ -8,7 +8,7 @@ interface Rows {
     id: number,
     nCuota: number,
     fechaVencimiento: string,
-    montoUF: number
+    montoUF: string
 }
 
 interface dataFromChildInterface {
@@ -19,7 +19,6 @@ interface dataFromChildInterface {
 const SolicitudPrestamo = () => {
 
     const [dataFromChild, setDataFromChild] = useState<dataFromChildInterface>({ id_simulacion: 0, cuotas: [] });
-    const [table, setTable] = useState<boolean>(false);
     const [rows, setRows] = useState<Rows[]>([]);
 
     const columns: GridColDef[] = [
@@ -31,6 +30,7 @@ const SolicitudPrestamo = () => {
     const handleDataFromChild = (data: any) => {
         setDataFromChild(data); //En DataFromChild se guarda la data que viene del componente hijo
         setRows(dataFromChild.cuotas); //Se setea la data en rows para mostrarla en la tabla
+        console.log(dataFromChild.cuotas)
     };
 
     return (
@@ -38,21 +38,17 @@ const SolicitudPrestamo = () => {
             <div className="solicitud--header">
                 <h1>Simulación de Préstamo</h1>
             </div>
-            <FormSolicitudes setTable={setTable} sendDataToParent={handleDataFromChild} />
+            <FormSolicitudes sendDataToParent={handleDataFromChild} />
 
             <div className="solicitud--header">
                 <h1>Detalles simulación</h1>
             </div>
-            {!table && <div className="solicitud--noData">Primero debes realizar una simulación</div>}
-            {table && <>
-                <DataTable rows={rows} columns={columns} id="id" />
-                <div className="solicitud--solicitar">
-                    <div className="solicitud--solicitar--buttons">
-                        <button>Solicitar Préstamo</button>
-                    </div>
+            <DataTable rows={rows} columns={columns} id="id" />
+            <div className="solicitud--solicitar">
+                <div className="solicitud--solicitar--buttons">
+                    <button>Solicitar Préstamo</button>
                 </div>
-            </>}
-
+            </div>
         </div>
     )
 }
