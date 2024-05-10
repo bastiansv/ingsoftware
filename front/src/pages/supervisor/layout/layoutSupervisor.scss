@@ -1,9 +1,9 @@
-.layoutAnalista{
+.layoutSupervisor{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     position: relative;
-    .analista{
+    .supervisor{
 
         &--navbar{
             background: rgb(30, 30, 30);
@@ -14,13 +14,13 @@
         &--main{
             width: 100%;
             display: flex;
-           .analista--menu--container{
+           .supervisor--menu--container{
                 width: 250px;
                 background: rgb(224, 224, 224);
                 min-height: 100vh;
            }
 
-           .analista--content--container{
+           .supervisor--content--container{
                 width: 100%;
                 background: rgb(233, 233, 233);
            }
