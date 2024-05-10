@@ -35,13 +35,19 @@ export default class SimulationController {
       const simulations = await Simulation.findAll({
         where: { userId: userId },
       });
-  
       if (!simulations || simulations.length === 0) {
         res.status(404).json({ error: 'Simulaciones no encontradas para el usuario' });
         return;
       }
-  
-      res.send(simulations);
+      //Aqui solo devuelvo los campos id, userRut, totalAmount, startDate(formatearlo a YYYY-MM-DD), endDate(formatearlo a YYYY-MM-DD)
+      let simulationsFormatted = [];
+      simulations.forEach(simulation => { 
+        let startDate = new Date(simulation.startDate).toISOString().slice(0, 10);
+        let endDate = new Date(simulation.endDate).toISOString().slice(0, 10);
+        simulationsFormatted.push({ id: simulation.id, userRut: simulation.userRut, totalAmount: simulation.totalAmount, startDate: startDate, endDate: endDate });
+      });
+      res.send(simulationsFormatted);
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Error al obtener las simulaciones' });

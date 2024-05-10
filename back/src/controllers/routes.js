@@ -25,6 +25,7 @@ export default (app) => {
 
 	app.get('/solicitudes', solicitudesController.getAllSolicitudes);
 	app.post('/solicitud', solicitudesController.createSolicitudes);
+	app.get('/informeCreditosOtorgados', solicitudesController.informeCreditosOtorgados);
 
 	app.get('/uf', simulationController.ufValue);
 
