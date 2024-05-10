@@ -9,7 +9,7 @@ const NavbarEjecutivo = () => {
         </div>
 
         <div className="navbarEjecutivo--user">
-            Bienvenido, Usuario!
+            Bienvenido, Ejecutivo!
         </div>
     </div>
   )

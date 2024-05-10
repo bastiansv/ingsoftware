@@ -13,7 +13,7 @@ const Navbar = () => {
 
             <ul>
                 <li onClick={()=>navigate("/supervisor/cotizaciones")}>
-                    <img src="/list2.svg" alt="" />
+                    <img src="/list3.svg" alt="" />
                     <p>Cotizaciones</p>
                 </li>
                 <li onClick={()=>navigate("/supervisor/solicitudes")}>
@@ -27,7 +27,7 @@ const Navbar = () => {
             </ul>
 
             <div className="navbarEjecutivo--user">
-                Bienvenido, Usuario!
+                Bienvenido, Supervisor!
             </div>
         </div>
     )
