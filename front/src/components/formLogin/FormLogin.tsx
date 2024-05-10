@@ -20,7 +20,7 @@ const FormLogin = () => {
             navigate('/ejecutivo'); 
         break;
         case 'analista':
-            navigate('/analista');
+            navigate('/analista/solicitudes');
           break;
         case 'gerente':
             navigate('/gerente');

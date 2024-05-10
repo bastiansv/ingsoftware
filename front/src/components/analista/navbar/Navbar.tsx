@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom"
 import "./navbar.scss"
 
 const Navbar = () => {
+    const navigate = useNavigate();
     return (
         <div className='navbar'>
             <div className="navbarEjecutivo--logo">
@@ -10,7 +12,7 @@ const Navbar = () => {
             </div>
 
             <ul>
-                <li>
+                <li onClick={()=>navigate("/analista/solicitudes")}>
                     <img src="/pending2.svg" alt="" />
                     <p>Solicitudes pendientes</p>
                 </li>

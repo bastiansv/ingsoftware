@@ -57,11 +57,11 @@ const FormSolicitudes: React.FC<ChildProps> = ({setRows,setTable}) => {
                     <div className="form--section">
                         <div className="form--item">
                             <label htmlFor="monto">Monto:</label>
-                            <input type="number" name="monto" id="monto" value={amount} onChange={e => setAmount(Number(e.target.value))}/>
+                            <input type="number" name="monto" id="monto" onChange={e => setAmount(Number(e.target.value))}/>
                         </div>
                         <div className="form--item">
                             <label htmlFor="interes">Interés:</label>
-                            <input type="number" name="interes" id="interes" value={interest} onChange={e => setInterest(Number(e.target.value))}/>
+                            <input type="number" name="interes" id="interes" onChange={e => setInterest(Number(e.target.value))}/>
                         </div>
                     </div>
                 </div>

@@ -11,11 +11,6 @@ interface Rows {
     montoUF: string
 }
 
-interface dataFromChildInterface {
-    id_simulacion: number,
-    cuotas: Rows[]
-}
-
 const SolicitudPrestamo = () => {
 
     const [rows, setRows] = useState<Rows[]>([]);
@@ -34,11 +29,10 @@ const SolicitudPrestamo = () => {
             </div>
             <FormSolicitudes setTable={setTable} setRows={setRows} />
 
-            <div className="solicitud--header">
-                <h1>Detalles simulación</h1>
-            </div>
-            {!table && <div className="solicitud--noData"> Primero debes realizar una simulación </div>}
             {table && <>
+                <div className="solicitud--header">
+                    <h1>Detalles simulación</h1>
+                </div>
                 <DataTable rows={rows} columns={columns} id="id" />
                 <div className="solicitud--solicitar">
                     <div className="solicitud--solicitar--buttons">
