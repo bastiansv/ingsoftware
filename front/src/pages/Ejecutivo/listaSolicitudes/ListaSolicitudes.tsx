@@ -20,7 +20,7 @@ const ListaSolicitudes = () => {
             } else if (estado === 'Rechazado') {
               className = 'rechazado';
             }
-            return className;
+            return "estado "+className;
           }
         },
     ];

@@ -6,8 +6,10 @@ import Home from './pages/Ejecutivo/home/Home'
 import SolicitudPrestamo from './pages/Ejecutivo/solicitudPrestamo/SolicitudPrestamo'
 import ListaSimulaciones from './pages/Ejecutivo/listaSimulaciones/ListaSimulaciones'
 import ListaSolicitudes from './pages/Ejecutivo/listaSolicitudes/ListaSolicitudes'
-import LayoutAnalista from './pages/analista/layout/LayoutAnalista'
-import SolicitudesPrestamo from './pages/analista/solicitudesPrestamo/solicitudesPrestamo'
+import LayoutSupervisor from './pages/supervisor/layout/LayoutSupervisor'
+import SolicitudesPrestamo from './pages/supervisor/solicitudesPrestamo/solicitudesPrestamo'
+import Cotizaciones from './pages/supervisor/cotizaciones/Cotizaciones'
+
 
 function App() {
 
@@ -21,8 +23,9 @@ function App() {
           <Route path="/ejecutivo/simulaciones" element={<ListaSimulaciones/>}/>
           <Route path="/ejecutivo/solicitudes" element={<ListaSolicitudes/>}/>
         </Route>
-        <Route path='/analista/solicitudes' element={<LayoutAnalista/>}>
-          <Route path='/analista/solicitudes' element={<SolicitudesPrestamo/>}/>
+        <Route path='/supervisor' element={<LayoutSupervisor/>}>
+          <Route path='/supervisor/solicitudes' element={<SolicitudesPrestamo/>}/>
+          <Route path='/supervisor/cotizaciones' element={<Cotizaciones/>}/> 
         </Route>
       </Routes>
     </Router>
