@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./formSolicitudes.scss"
 
-interface ChildProps {
-    sendDataToParent: (data: string) => void;
+interface Rows {
+    id: number,
+    nCuota: number,
+    fechaVencimiento: string,
+    montoUF: string
 }
 
-const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent}) => {
+interface ChildProps {
+    setRows: (data: Rows[]) => void;
+    setTable: (data: boolean) => void;
+}
+
+const FormSolicitudes: React.FC<ChildProps> = ({setRows,setTable}) => {
     const [rut, setRut] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -24,7 +32,8 @@ const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent}) => {
             endDate,
             interestRate: interest
         });
-        sendDataToParent(response.data);
+        setRows(response.data.cuotas);
+        setTable(true);
     };
 
     return (
