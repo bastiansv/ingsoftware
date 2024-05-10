@@ -4,9 +4,10 @@ import "./formSolicitudes.scss"
 
 interface ChildProps {
     sendDataToParent: (data: string) => void;
+    setTable: (modal: boolean) => void;
 }
 
-const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent}) => {
+const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent,setTable}) => {
     const [rut, setRut] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -25,6 +26,7 @@ const FormSolicitudes: React.FC<ChildProps> = ({sendDataToParent}) => {
             interestRate: interest
         });
         sendDataToParent(response.data);
+        setTable(true);
     };
 
     return (

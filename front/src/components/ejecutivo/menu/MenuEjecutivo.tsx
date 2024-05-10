@@ -17,8 +17,8 @@ const MenuEjecutivo = () => {
                 <a href="/ejecutivo/simulaciones">Lista simulaciones</a>
             </li>
             <li>
-                <img src="/list.svg" alt="" />
-                <a href="/ejecutivo">Lista solicitudes</a>
+                <img src="/list2.svg" alt="" />
+                <a href="/ejecutivo/solicitudes">Lista solicitudes</a>
             </li>
         </ul>
     </div>
