@@ -19,13 +19,13 @@ interface dataFromChildInterface {
 const SolicitudPrestamo = () => {
 
     const [dataFromChild, setDataFromChild] = useState<dataFromChildInterface>({ id_simulacion: 0, cuotas: [] });
-    const [modal, setModal] = useState<boolean>(false);
+    const [table, setTable] = useState<boolean>(false);
     const [rows, setRows] = useState<Rows[]>([]);
 
     const columns: GridColDef[] = [
-        { field: 'cuota', headerName: 'Número de Cuota', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
-        { field: 'fecha', headerName: 'Fecha de Pago', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
-        { field: 'monto', headerName: 'Monto en UF', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
+        { field: 'nCuota', headerName: 'Número de Cuota', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
+        { field: 'fechaVencimiento', headerName: 'Fecha de Pago', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
+        { field: 'montoUF', headerName: 'Monto en UF', width: 150, flex: 1, headerAlign: 'center', align: 'center' },
     ];
 
     const handleDataFromChild = (data: any) => {
@@ -38,13 +38,13 @@ const SolicitudPrestamo = () => {
             <div className="solicitud--header">
                 <h1>Simulación de Préstamo</h1>
             </div>
-            <FormSolicitudes setModal={setModal} sendDataToParent={handleDataFromChild} />
+            <FormSolicitudes setTable={setTable} sendDataToParent={handleDataFromChild} />
 
             <div className="solicitud--header">
                 <h1>Detalles simulación</h1>
             </div>
-            {!modal && <div className="solicitud--noData">Primero debes realizar una simulación</div>}
-            {modal && <>
+            {!table && <div className="solicitud--noData">Primero debes realizar una simulación</div>}
+            {table && <>
                 <DataTable rows={rows} columns={columns} id="id" />
                 <div className="solicitud--solicitar">
                     <div className="solicitud--solicitar--buttons">
