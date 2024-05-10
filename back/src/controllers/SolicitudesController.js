@@ -50,24 +50,26 @@ export default class SolicitudesController {
         }
     }
 
-    //Función para obtener el monto total de créditos con estado "aprobado" en cierto periodo de tiempo (entre ciertas fechas), como tambien
-    //mostrando los intereses asociados a estos créditos
-    async informeCreditosOtorgados(req, res) {
+    //Función para obtener id,id_ejecutivo, rut, monto solicitado, fecha inicio, fecha termino. de las solicitudes
+    async infoSupervisor(req, res) {
         try {
-            //startDate y endDate son fechas en formato "YYYY-MM-DD"
-            const startDate = req.body.startDate;
-            const endDate = req.body.endDate;
-            const interesesCreditos = await sequelize.query(
-                `SELECT "id","interestRate" FROM "Solicitudes" WHERE "estado" = 'Aprobado' AND "startDate" >= '${startDate}' AND "startDate" <= '${endDate}'`,
-                { type: sequelize.QueryTypes.SELECT }
-            );
-            //Aqui calculo el monto total de los creditos otorgados en el periodo de tiempo, con una query
-            const totalOtorgados = await sequelize.query(`SELECT SUM("totalAmount") FROM "Solicitudes" WHERE "estado" = 'Aprobado' AND "startDate" >= '${startDate}' AND "startDate" <= '${endDate}'`,)
-
-            res.json({ total: totalOtorgados[0][0].sum , intereses: interesesCreditos });
+            const solicitudes = await Solicitudes.findAll({
+                attributes: ['id', 'id_ejecutivo', 'userRut', 'totalAmount', 'startDate', 'endDate'],
+                where: {
+                    estado: 'Pendiente'
+                }
+            });
+            //En esta parte, formateo las fechas desde timestamp with timezone a solo date
+            let formateadas = [];
+            solicitudes.forEach(solicitud => {
+                let startDate = new Date(solicitud.startDate).toISOString().slice(0, 10);
+                let endDate = new Date(solicitud.endDate).toISOString().slice(0, 10);
+                formateadas.push({ id: solicitud.id, id_ejecutivo: solicitud.id_ejecutivo, userRut: solicitud.userRut, totalAmount: solicitud.totalAmount, startDate: startDate, endDate: endDate });
+            });
+            res.send(formateadas);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'Error al obtener el informe de créditos otorgados' });
+            res.status(500).json({ error: 'Error al obtener las solicitudes' });
         }
     }
 }

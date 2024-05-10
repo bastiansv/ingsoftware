@@ -16,6 +16,7 @@ export default (app) => {
 	app.delete('/users/:userId', userController.delete);
 
   	app.get('/simulations', simulationController.getAllSimulations);
+	app.get('/simulationsSupervisor', simulationController.getSimulationsSupervisor);
 	app.put('/simulations/all', simulationController.getSimulationsByUserId);
   	app.post('/simulations', simulationController.createSimulation);
   	app.get('/simulations/:id', simulationController.getSimulationById);
@@ -25,7 +26,7 @@ export default (app) => {
 
 	app.get('/solicitudes', solicitudesController.getAllSolicitudes);
 	app.post('/solicitud', solicitudesController.createSolicitudes);
-	app.get('/informeCreditosOtorgados', solicitudesController.informeCreditosOtorgados);
+	app.get('/infoSupervisor', solicitudesController.infoSupervisor);
 
 	app.get('/uf', simulationController.ufValue);
 

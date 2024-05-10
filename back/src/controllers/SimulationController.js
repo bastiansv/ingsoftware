@@ -1,3 +1,4 @@
+import sequelize from '../database.js';
 import Simulation from '../models/Simulation.js';
 import axios from 'axios';
 
@@ -11,6 +12,39 @@ export default class SimulationController {
       res.status(500).json({ error: 'Error al obtener las simulaciones' });
     }
   }
+
+  //Aqui implementare una funcion que rescata todas las simulaciones + el id de su respectivo ejecutivo
+  async getSimulationsSupervisor(req, res) {
+    try {  
+      const simulations = await sequelize.query( 
+        `SELECT 
+          "Simulations"."id", 
+          "Simulations"."userId" as id_ejecutivo,
+          "Simulations"."userRut", 
+          "Simulations"."totalAmount", 
+          "Simulations"."startDate", 
+          "Simulations"."endDate"
+         FROM "Simulations"`,
+        { type: sequelize.QueryTypes.SELECT }
+      );
+      if (!simulations || simulations.length === 0) {
+        res.status(404).json({ error: 'Simulaciones no encontradas para el usuario' });
+        return;
+      }
+      //Aqui solo devuelvo los campos id, userRut, totalAmount, startDate(formatearlo a YYYY-MM-DD), endDate(formatearlo a YYYY-MM-DD)
+      let simulationsFormatted = [];
+      simulations.forEach(simulation => { 
+        let startDate = new Date(simulation.startDate).toISOString().slice(0, 10);
+        let endDate = new Date(simulation.endDate).toISOString().slice(0, 10);
+        simulationsFormatted.push({ id: simulation.id, id_ejecutivo: simulation.id_ejecutivo,userRut: simulation.userRut, totalAmount: simulation.totalAmount, startDate: startDate, endDate: endDate });
+      });
+      res.send(simulationsFormatted);
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al obtener las simulaciones' });
+    }
+  }  
 
   async getSimulationById(req, res) {
     try {
@@ -53,6 +87,8 @@ export default class SimulationController {
       res.status(500).json({ error: 'Error al obtener las simulaciones' });
     }
   }  
+
+
 
   async ufValue(req, res) {
     try {

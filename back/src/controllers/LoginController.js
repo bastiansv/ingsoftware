@@ -19,7 +19,9 @@ export default class {
           res.send({ id: user.id, role: "analista" });
         } else if (user.email.includes("@gerente.cl")) {
           res.send({ id: user.id, role: "gerente" });
-        } 
+        } else if (user.email.includes("@supervisor.cl")) {
+          res.send({ id: user.id, role: "supervisor" });
+        }
       } else {
         res.status(401).send({ message: "Usuario o contraseña incorrectos" });
       }
