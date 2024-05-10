@@ -27,6 +27,7 @@ export default (app) => {
 	app.get('/solicitudes', solicitudesController.getAllSolicitudes);
 	app.post('/solicitud', solicitudesController.createSolicitudes);
 	app.get('/infoSupervisor', solicitudesController.infoSupervisor);
+	app.put('/solicitudesbyId', solicitudesController.getAllSolicitudesByUserId);
 
 	app.get('/uf', simulationController.ufValue);
 

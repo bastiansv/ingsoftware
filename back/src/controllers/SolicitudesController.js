@@ -13,6 +13,29 @@ export default class SolicitudesController {
         }
     }
 
+    async getAllSolicitudesByUserId(req, res) {
+        try {
+            const { userId } = req.body;
+            const solicitudes = await Solicitudes.findAll({
+                attributes: ['id', 'userRut', 'totalAmount', 'startDate', 'endDate', 'estado'],
+                where: {
+                    id_ejecutivo: userId
+                }
+            });
+            //En esta parte, formateo las fechas desde timestamp with timezone a solo date
+            let formateadas = [];
+            solicitudes.forEach(solicitud => {
+                let startDate = new Date(solicitud.startDate).toISOString().slice(0, 10);
+                let endDate = new Date(solicitud.endDate).toISOString().slice(0, 10);
+                formateadas.push({ id: solicitud.id, userRut: solicitud.userRut, totalAmount: solicitud.totalAmount, startDate: startDate, endDate: endDate , estado: solicitud.estado});
+            });
+            res.send(formateadas);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al obtener las solicitudes' });
+        }
+    }
+
     async createSolicitudes(req, res) {
         const transaction = await sequelize.transaction();
         try {
