@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./formSolicitudes.scss"
 
@@ -20,6 +20,17 @@ const FormSolicitudes: React.FC<ChildProps> = ({setRows,setTable}) => {
     const [endDate, setEndDate] = useState('');
     const [amount, setAmount] = useState(0);
     const [interest, setInterest] = useState(0);
+    const [ufValue, setUfValue] = useState(0);
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/uf')
+            .then(response => {
+                setUfValue(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
 
     const sendDataToParentOnClick = async () => {
         const userData = JSON.parse(localStorage.getItem('userData') || '{}');
@@ -63,7 +74,12 @@ const FormSolicitudes: React.FC<ChildProps> = ({setRows,setTable}) => {
                             <label htmlFor="interes">Interés:</label>
                             <input type="number" name="interes" id="interes" onChange={e => setInterest(Number(e.target.value))}/>
                         </div>
+                        <div className="form--item">
+                            <label htmlFor="uf">UF:</label>
+                            <input type="text" name="uf" id="uf" value={ufValue} disabled/>
+                        </div>
                     </div>
+                    
                 </div>
                 <div className="form--button">
                     <button type="button" onClick={sendDataToParentOnClick}>Simular</button>
