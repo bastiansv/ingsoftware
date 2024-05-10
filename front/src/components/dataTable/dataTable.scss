@@ -6,6 +6,8 @@
     .dataGrid {
         color: #333333;
         max-width: 90%;
+        min-height: 250px;
+        background-color: rgb(239, 239, 239);
 
         .MuiDataGrid-scrollbar{
             z-index: 1;

@@ -1,0 +1,24 @@
+.listaSolicitudes{
+    min-height: calc(100vh - 60px);
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    z-index: 1;
+
+    .aprobado{
+        background-color: #419444;
+        color: white;
+    }
+
+    .pendiente{
+        background-color: #daa609;
+        color: white;
+    }
+
+    .rechazado{
+        background-color: #cf372c;
+        color: white;
+    }
+}

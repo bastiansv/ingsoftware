@@ -42,6 +42,12 @@ const DataTable = (props: Props) => {
             width: "100%",
             color: "white",
             padding: "0 15px",
+            fontSize: "16px",
+          },
+
+          "& .MuiDataGrid-cell": {
+            fontWeight: 400,
+            fontSize: "16px",
           },
         }}
         getRowId={(row) => row[props.id ? props.id : "id"]}
