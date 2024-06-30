@@ -186,7 +186,7 @@ export default class SimulationController {
       while (fecha < endDate) {
         // Crear una nueva variable para la fecha formateada
         let fechaFormateada = new Date(fecha).toISOString().slice(0, 10);
-        cuotas.push({ id: i, nCuota: i, fechaVencimiento: fechaFormateada, montoUF: cuotaUF });
+        cuotas.push({ id: i, nCuota: i, fechaVencimiento: fechaFormateada, montoUF: parseInt(cuotaUF) });
         fecha.setMonth(fecha.getMonth() + 1);
         i++;
       }

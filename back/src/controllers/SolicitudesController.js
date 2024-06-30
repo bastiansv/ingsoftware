@@ -43,7 +43,7 @@ export default class SolicitudesController {
             const id_simulacion = req.body.id_simulacion;
             const simulacion = await Simulation.findByPk(id_simulacion);
             if (!simulacion) {
-                res.status(404).json({ error: 'Simulación no encontrada' });
+                res.status(400).json({ error: 'Simulación no encontrada' });
                 return;
             } else {
                 console.log(simulacion);
