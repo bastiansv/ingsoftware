@@ -29,7 +29,7 @@ const FormLogin = () => {
           toast.error('Error de rol');
       }
     } catch (error: any) {
-      console.error(error);1
+      console.error(error);
       if (error.response && error.response.status === 401) {
         toast.error(error.response.data.message);
       } else {
